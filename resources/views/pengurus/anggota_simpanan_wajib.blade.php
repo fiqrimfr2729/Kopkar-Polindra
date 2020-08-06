@@ -55,10 +55,10 @@
                             <td>{{$data->nama_lengkap}}</td>
                             <td>{{$data->no_anggota}}</td>
                             <td>
-                                <?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
+                                <?php $jumlah = $data->jumlah_tahun_ini; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
                             </td>
                             <td>
-                                <?php $jumlah = $data->jumlah_tahun_ini; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
+                                <?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
                             </td>
                             <td>
                                 <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" data-nama_lengkap="{{$data->nama_lengkap}}" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>
@@ -188,7 +188,7 @@
                 console.log("test");
                 e.preventDefault();
                 $.ajax({
-                    url: '/pengurus/simpanan_pokok_create',
+                    url: '/pengurus/simpanan_wajib_create',
                     type: formCreate.attr('method'),
                     data: formCreate.serialize(),
                     dataType: "json",
@@ -202,7 +202,7 @@
                               'success'
                           ).then(OK => {
                             if(OK){
-                                window.location.href = "{{ route('simpanan_pokok_anggota') }}";
+                                window.location.href = "{{ route('simpanan_wajib_anggota') }}";
                             }
                           });
                       }else{

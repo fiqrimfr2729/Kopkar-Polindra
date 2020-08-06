@@ -18,7 +18,7 @@ Route::get('/login_admin', 'Admin\Login@index')->name('login_admin');
 Route::post('/do_login_admin', 'Admin\Login@login')->name('do_login_admin');
 Route::get('/logout_admin', 'Admin\Login@logout')->name('logout_admin');
 //Anggota
-Route::get('/anggota', 'Admin\AnggotaController@index')->name('anggota');
+Route::get('/anggota', 'Admin\AnggotaController@index')->name('admin_anggota');
 Route::get('/form_anggota', 'Admin\AnggotaController@form')->name('form_anggota');
 Route::get('/form_edit_anggota/{no_anggota}', 'Admin\AnggotaController@form_edit')->name('form_edit_anggota');
 Route::post('/anggota_create', 'Admin\AnggotaController@store')->name('anggota_create');
@@ -45,6 +45,9 @@ Route::post('/do_login', 'Login@login')->name('do_login');
 //Pengurus
 Route::get('/pengurus/dashboard', 'Pengurus\Dashboard@index')->name('dashboard_pengurus');
 Route::get('/pengurus/anggota', 'Pengurus\AnggotaController@index')->name('anggota');
+Route::get('/pengurus/login', 'Pengurus\Login@index')->name('login_pengurus');
+Route::get('/pengurus/logout', 'Pengurus\Login@logout')->name('logout_pengurus');
+Route::post('/pengurus/do_login', 'Pengurus\Login@login')->name('do_login');
 //Simpanan Pokok
 Route::get('/pengurus/simpanan_pokok_anggota', 'Pengurus\SimpananPokokController@pokok_anggota')->name('simpanan_pokok_anggota');
 Route::get('/pengurus/simpanan_pokok/', 'Pengurus\SimpananPokokController@angsuran')->name('angsuran_simpanan_pokok');
@@ -66,6 +69,10 @@ Route::get('/pengurus/detail_simpanan_sukarela/{no_anggota}', 'Pengurus\Simpanan
 //SHU
 Route::get('/pengurus/shu_anggota', 'Pengurus\SimpananHasilUsahaController@shu_anggota')->name('shu_anggota');
 Route::get('/pengurus/total_simpanan', 'Pengurus\SimpananHasilUsahaController@total_simpanan')->name('total_simpanan');
+Route::post('/pengurus/hitung_shu', 'Pengurus\SimpananHasilUsahaController@hitung_shu')->name('hitung_shu');
+Route::get('/pengurus/rincian_penerimaan_shu/{tahun}', 'Pengurus\SimpananHasilUsahaController@rincian_penerimaan_shu')->name('rincian_penerimaan_shu');
+Route::post('/pengurus/pengurangan_shu', 'Pengurus\SimpananHasilUsahaController@pengurangan_shu')->name('pengurangan_shu');
+
 
 Route::get('/login_pengurus', 'Pengurus\Login@index');
 

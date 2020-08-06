@@ -96,6 +96,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="tgl_dibayar">Tanggal Dibayarkan</label>
+                  <input type="date" class="form-control" id="" name="tanggal" required>
+                </div>
+
+                <div class="form-group">
                     <label for="Nama Unit Kerja">Jumlah yang dibayarkan</label>
                     <input type="text" class="form-control mask-money" id="" name="jumlah" value="" required />
                 </div>

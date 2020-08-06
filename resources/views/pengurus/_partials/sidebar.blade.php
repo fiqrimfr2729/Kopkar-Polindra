@@ -11,7 +11,7 @@
         </li>
 
       <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">
-          <a href=""><span class="fas fa-users"></span> Anggota </a>
+          <a href="{{route('anggota')}}"><span class="fas fa-users"></span> Anggota </a>
       </li>
 
       <li class="<?php if($menu == 'simpanan_pokok'){echo 'active';}?> ripple">
@@ -44,14 +44,14 @@
         </ul>
       </li>
 
-      <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">
-        <a href=""><span class="fas fa-wallet"></span> Simpanan Hasil Usaha </a>
+      <li class="<?php if($menu == 'shu_anggota'){echo 'active';}?> ripple">
+        <a href="{{route('shu_anggota')}}"><span class="fas fa-wallet"></span> Simpanan Hasil Usaha </a>
       </li>
         
 
 
         <li class="ripple">
-          <a href=""><span class="fa fa-power-off"></span> Logout</a>
+          <a href="{{route('logout_pengurus')}}"><span class="fa fa-power-off"></span> Logout</a>
         </li>
   
       </ul>

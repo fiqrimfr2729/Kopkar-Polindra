@@ -69,10 +69,9 @@ class SimpananPokokController extends Controller
         date_default_timezone_set("Asia/Jakarta");
         $simpanan = new SimpananPokok();
         
-        $tanggal = date("Y-m-d");
-
+        
         $simpanan->no_anggota = $request->no_anggota;
-        $simpanan->tanggal = $tanggal;
+        $simpanan->tanggal = $request->tanggal;
         $simpanan->jumlah = str_replace('.', '', $request->jumlah);
 
         $simpanan->save();

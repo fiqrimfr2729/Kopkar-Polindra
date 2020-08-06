@@ -46,9 +46,13 @@ class AnggotaController extends Controller
         $anggota = new Anggota();
         
 
-        $last_id = DB::table('anggota')->latest('no_anggota')->get();
-        $last_id = $last_id->no_anggota;
-        $last_id = substr($last_id, -2);
+        $last_id = DB::table('anggota')->latest('no_anggota')->first();
+        if($last_id == null){
+            $last_id = '0';
+        }else{
+            $last_id = $last_id->no_anggota;
+            $last_id = substr($last_id, -2);
+        }  
         $last_id = (int)$last_id;
         $last_id++; 
         $last_id = str_pad($last_id, 3, '0', STR_PAD_LEFT);
@@ -63,7 +67,7 @@ class AnggotaController extends Controller
         $anggota->id_unit_kerja = $requst->id_unit_kerja;
         $anggota->tgl_gabung = $requst->tgl_gabung;
         $anggota->role = 1;
-        $anggota->password = Hash::make('Anggota123');
+        $anggota->password = Hash::make('Anggota123', ['rounds' => 12 ]);
 
         $query = $anggota->save();
 

@@ -15,7 +15,7 @@
               <span class="fa-angle-right fa right-arrow text-right"></span>
             </a>
             <ul class="nav nav-list tree">
-                <li><a href="{{ route('anggota') }}">Anggota</a></li>
+                <li><a href="{{ route('admin_anggota') }}">Anggota</a></li>
                 <li><a href="{{ route('pengurus') }}">Pengurus</a></li>
                 <li><a href="dashboard-v2.html">Pengawas</a></li>
                 <li><a href="{{ route('unit_kerja') }}">Unit Kerja</a></li>

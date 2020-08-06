@@ -148,7 +148,7 @@
                           'success'
                       ).then(OK => {
                         if(OK){
-                            window.location.href = "{{ route('anggota') }}";
+                            window.location.href = "{{ route('admin_anggota') }}";
                         }
                       });
                   }else{
