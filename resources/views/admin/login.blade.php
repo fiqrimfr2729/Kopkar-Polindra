@@ -49,13 +49,6 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-30">
-						<div>
-							<a href="#" class="txt1">
-								Lupa Password ?
-							</a>
-						</div>
-					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
