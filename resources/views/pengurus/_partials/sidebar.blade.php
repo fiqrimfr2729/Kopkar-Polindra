@@ -48,7 +48,9 @@
         <a href="{{route('shu_anggota')}}"><span class="fas fa-wallet"></span> Simpanan Hasil Usaha </a>
       </li>
         
-
+      <li class="<?php if($menu == 'pinjaman'){echo 'active';}?> ripple">
+        <a href="{{route('pinjaman')}}"><span class="fas fa-wallet"></span> Pinjaman </a>
+      </li>
 
         <li class="ripple">
           <a href="{{route('logout_pengurus')}}"><span class="fa fa-power-off"></span> Logout</a>

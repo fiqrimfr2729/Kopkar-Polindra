@@ -75,7 +75,7 @@ Route::get('/pengurus/rincian_penerimaan_shu/{tahun}', 'Pengurus\SimpananHasilUs
 Route::post('/pengurus/pengurangan_shu', 'Pengurus\SimpananHasilUsahaController@pengurangan_shu')->name('pengurangan_shu');
 //Pinjaman
 Route::get('/pengurus/pinjaman', 'Pengurus\PinjamanController@index')->name('pinjaman');
-Route::post('/pengurus/setujui_pinjaman', 'Pengurus\PinjamanController@setujui_pinjaman')->name('pinjaman');
+Route::post('/pengurus/setujui_pinjaman', 'Pengurus\PinjamanController@setujui_pinjaman')->name('Setujui_pinjaman');
 
 Route::get('/login_pengurus', 'Pengurus\Login@index');
 
