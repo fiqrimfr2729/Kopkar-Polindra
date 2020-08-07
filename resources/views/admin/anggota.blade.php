@@ -61,8 +61,8 @@
                               <td> 
                                 <a data-target="#modalFormDetail" data-toggle="modal" class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
                                 <a href="{{route('form_edit_anggota', ['no_anggota'=>$data->no_anggota])}}" class=" btn  ripple-infinite btn-primary" data-placement="top" title="Ubah"><span class="fas fa-edit"></span></a>
-                                <a data-target="#modalResetPWD" data-toggle="modal" class=" btn  ripple-infinite btn-info" data-placement="top" title="Reset Password"><span class="fas fa-sync"></span></a>
-                                <a data-target="#modalHapusSiswa" data-toggle="modal" class=" btn  ripple-infinite btn-danger" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                                <a data-target="#modalReset" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" class=" btn  ripple-infinite btn-info" data-placement="top" title="Reset Password"><span class="fas fa-sync"></span></a>
+                                <a data-target="#modalHapus" data-toggle="modal" class=" btn  ripple-infinite btn-danger" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
                               </td>
                             </tr>
                         @endforeach
@@ -78,6 +78,58 @@
     </div>
     <!-- end: content -->
 
+    <div class="modal fade" id="modalReset" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">Reset password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="modalFormReset" method="POST">
+              {{ csrf_field() }}
+            <input type="hidden" name="no_anggota" id="cat_id">
+              <p><center>Apa anda yakin akan mereset password ?</center></p>
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button id="btnDelete" class="btn btn-danger">Reset</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">Hapus Data Unit Kerja</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="modalFormHapus" method="POST">
+              {{ csrf_field() }}
+            <input type="hidden" name="no_anggota" id="cat_id">
+              <p><center>Apa anda yakin akan menghapus data ini ?</center></p>
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button id="btnDelete" class="btn btn-danger">Hapus</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
 
     <!-- start: right menu -->
     @include('admin._partials.right_menu')
@@ -92,6 +144,8 @@
   <!-- start: Javascript -->
   @include('admin._partials.js')
   <!-- end: Javascript -->
+
+  
 </body>
 
 </html>

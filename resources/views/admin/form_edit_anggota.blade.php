@@ -162,7 +162,8 @@
                           'success'
                       ).then(OK => {
                         if(OK){
-                            window.location.href = "{{ route('anggota') }}";
+                            window.history.back();
+                            location.reload();
                         }
                       });
                   }else{

@@ -7,7 +7,7 @@
         </li>
   
       <li class="<?php if($menu == 'dashboard'){echo 'active';}?> ripple">
-          <a href=""><span class="fa-home fa"></span> Dashboard </a>
+          <a href="{{ route('dashboard_admin') }}"><span class="fa-home fa"></span> Dashboard </a>
         </li>
   
         <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">
@@ -17,7 +17,7 @@
             <ul class="nav nav-list tree">
                 <li><a href="{{ route('admin_anggota') }}">Anggota</a></li>
                 <li><a href="{{ route('pengurus') }}">Pengurus</a></li>
-                <li><a href="dashboard-v2.html">Pengawas</a></li>
+                <li><a href="{{route('pengawas')}}">Pengawas</a></li>
                 <li><a href="{{ route('unit_kerja') }}">Unit Kerja</a></li>
             </ul>
         </li>

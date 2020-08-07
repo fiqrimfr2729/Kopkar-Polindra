@@ -32,13 +32,14 @@
           <div class="col-md-12 padding-0 animated fadeInRight">
             <div class="panel">
                 <div class="panel-heading">
-                <h3>{{$anggota->nama_lengkap}} ({{$anggota->no_anggota}}) </h3>
+                <h3>{{$anggota->nama_lengkap}} ({{$anggota->no_anggota}}) 
+                  <span class="label label-success"><?php $jumlah = $detail['jumlah']-$pengurangan ; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
+                </h3>
                   
                 </div>
 
                 <div class="form-group" style="margin-top:10px; margin-left:10px;">
                     <a data-target="#modalCreate" data-toggle="modal" class="btn btn-raised btn-success"><i class="fas fa-plus"></i> Tambah data</a>
-                    <a data-target="#modalDetail" data-toggle="modal" class="btn btn-raised btn-info"><i class="fas fa-list"></i> Rincian </a>
                 </div>
                 
                 <div class="panel-body">
@@ -47,7 +48,7 @@
                       <thead>
                         <tr>
                           <th width="5%">No</th>
-                          <th>Tanggal Dibayarkan</th>
+                          <th>Tanggal</th>
                           <th>Jumlah</th>
                           <th width="30%">Keterangan </th>
                           <th>Action</th>
@@ -58,7 +59,7 @@
                         <tr>
                             <td>{{++$key}}</td>
                             <td>{{$data->tanggal}}</td>
-                            <td><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
+                            <td><?php $jumlah = $data->jumlah ; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
                             <td>@if ($data->ket == "") {{ "-" }} @else {{ $data->ket }} @endif
                             </td>
                             <td>

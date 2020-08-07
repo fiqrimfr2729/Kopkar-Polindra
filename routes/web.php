@@ -23,11 +23,12 @@ Route::get('/form_anggota', 'Admin\AnggotaController@form')->name('form_anggota'
 Route::get('/form_edit_anggota/{no_anggota}', 'Admin\AnggotaController@form_edit')->name('form_edit_anggota');
 Route::post('/anggota_create', 'Admin\AnggotaController@store')->name('anggota_create');
 Route::post('/anggota_update', 'Admin\AnggotaController@update')->name('anggota_update');
+Route::post('/reset_password', 'Admin\AnggotaController@reset_password')->name('reset_password');
 //Pengurus
 Route::get('/pengurus', 'Admin\PengurusController@index')->name('pengurus');
 Route::post('/pengurus_add', 'Admin\PengurusController@pengurus_add')->name('pengurus_add');
-
-Route::get('/pengawas', 'Admin\Pengawas@index')->name('pengawas');
+Route::get('/pengawas', 'Admin\PengawasController@index')->name('pengawas');
+Route::post('/pengawas_add', 'Admin\PengawasController@pengawas_add')->name('pengawas_add');
 Route::get('/kasir', 'Admin\Kasir@index')->name('kasir');
 Route::get('/kategori', 'Admin\KategoriBarang@index')->name('kategori');
 //Unit Kerja
@@ -78,4 +79,28 @@ Route::get('/login_pengurus', 'Pengurus\Login@index');
 
 
 //Pengawas
-Route::get('/pengawas', 'Pengawas\Dashboard@index');
+Route::get('/pengawas/dashboard', 'Pengawas\Dashboard@index')->name('dashboard_pengawas');
+Route::get('/pengawas/anggota', 'Pengawas\AnggotaController@index')->name('anggota_pengawas');
+Route::get('/pengawas/login', 'Pengawas\Login@index')->name('login_pengawaas');
+Route::get('/pengawas/logout', 'Pengawas\Login@logout')->name('logout_pengawas');
+Route::post('/pengawas/do_login', 'Pengawas\Login@login')->name('do_login_pengawas');
+//Simpanan Pokok
+Route::get('/pengawas/simpanan_pokok_anggota', 'Pengawas\SimpananPokokController@pokok_anggota')->name('simpanan_pokok_anggota_pengawas');
+Route::get('/pengawas/simpanan_pokok/', 'Pengawas\SimpananPokokController@angsuran')->name('angsuran_simpanan_pokok_pengawas');
+Route::get('/pengawas/simpanan_pokok/rincian_angsuran/{month}/{year}', 'Pengawas\SimpananPokokController@rincian_angsuran')->name('rincian_angsuran_pengawas');
+Route::get('/pengawas/detail_simpanan_anggota/{no_anggota}', 'Pengawas\SimpananPokokController@detail')->name('detail_simpanan_anggota_pengawas');
+//Simpanan wajib
+Route::get('/pengawas/simpanan_wajib_anggota', 'Pengawas\SimpananWajibController@wajib_anggota')->name('simpanan_wajib_anggota_pengawas');
+Route::get('/pengawas/detail_simpanan_wajib/{no_anggota}', 'Pengawas\SimpananWajibController@detail')->name('detail_simpanan_wajib_pengawas');
+Route::post('/pengawas/simpanan_wajib_create', 'Pengawas\SimpananWajibController@store')->name('simpanan_wajib_create_pengawas');
+Route::post('/pengawas/simpanan_wajib_delete', 'Pengawas\SimpananWajibController@delete')->name('simpanan_wajib_delete_pengawas');
+Route::get('/pengawas/simpanan_wajib/', 'Pengawas\SimpananWajibController@angsuran')->name('angsuran_simpanan_wajib_pengawas');
+Route::get('/pengawas/simpanan_wajib/rincian_angsuran/{month}/{year}', 'Pengawas\SimpananWajibController@rincian_angsuran')->name('rincian_angsuran_wajib_pengawas');
+//Simpanan sukarela
+Route::get('/pengawas/simpanan_sukarela_anggota', 'Pengawas\SimpananSukarelaController@sukarela_anggota')->name('simpanan_sukarela_anggota_pengawas');
+Route::post('/pengawas/simpanan_sukarela_create', 'Pengawas\SimpananSukarelaController@store')->name('simpanan_sukarela_create_pengawas');
+Route::get('/pengawas/detail_simpanan_sukarela/{no_anggota}', 'Pengawas\SimpananSukarelaController@detail')->name('detail_simpanan_sukarela_pengawas');
+//SHU
+Route::get('/pengawas/shu_anggota', 'Pengawas\SimpananHasilUsahaController@shu_anggota')->name('shu_anggota_pengawas');
+Route::get('/pengawas/total_simpanan', 'Pengawas\SimpananHasilUsahaController@total_simpanan')->name('total_simpanan_pengawas');
+Route::get('/pengawas/rincian_penerimaan_shu/{tahun}', 'Pengawas\SimpananHasilUsahaController@rincian_penerimaan_shu')->name('rincian_penerimaan_shu_pengawas');

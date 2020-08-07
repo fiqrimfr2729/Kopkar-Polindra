@@ -7,33 +7,48 @@
         </li>
   
       <li class="<?php if($menu == 'dashboard'){echo 'active';}?> ripple">
-          <a href=""><span class="fa-home fa"></span> Dashboard </a>
-        </li>
+          <a href="{{route('dashboard_pengawas')}}"><span class="fa-home fa"></span> Dashboard </a>
+      </li>
+
+      <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">
+        <a href="{{route('anggota_pengawas')}}"><span class="fas fa-users"></span> Anggota </a>
+      </li>
   
-        <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">
-            <a class="tree-toggle nav-header"><span class="fas fa-users"></span> Anggota 
-              <span class="fa-angle-right fa right-arrow text-right"></span>
-            </a>
-            <ul class="nav nav-list tree">
-                <li><a href="dashboard-v1.html">Anggota</a></li>
-                <li><a href="dashboard-v2.html">Pengurus</a></li>
-                <li><a href="dashboard-v2.html">Pengawas</a></li>
-                <li><a href="dashboard-v2.html">Unit Kerja</a></li>
-            </ul>
-        </li>
+      <li class="<?php if($menu == 'simpanan_pokok'){echo 'active';}?> ripple">
+        <a class="tree-toggle nav-header"><span class="fas fa-wallet"></span> 
+          Simpanan Pokok 
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li><a href="{{route('simpanan_pokok_anggota_pengawas')}}">Anggota</a></li>
+          <li><a href="{{route('angsuran_simpanan_pokok_pengawas')}}">Data Angsuran</a></li>
+        </ul>
+      </li>
 
-        <li class="<?php if($menu == 'simpanan'){echo 'active';}?> ripple">
-            <a class="tree-toggle nav-header"><span class="fas fa-cash-register"></span> Point of Sales 
-              <span class="fa-angle-right fa right-arrow text-right"></span>
-            </a>
-            <ul class="nav nav-list tree">
-                <li><a href="dashboard-v1.html">Kasir</a></li>
-                <li><a href="dashboard-v2.html">Transaksi</a></li>
-                <li><a href="dashboard-v2.html">Barang</a></li>
-                <li><a href="dashboard-v2.html">Kategori Barang</a></li>
-            </ul>
-        </li>
+      <li class="<?php if($menu == 'simpanan_wajib'){echo 'active';}?> ripple">
+        <a class="tree-toggle nav-header"><span class="fas fa-wallet"></span> Simpanan Wajib 
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li><a href="{{route('simpanan_wajib_anggota_pengawas')}}">Anggota</a></li>
+          <li><a href="{{route('angsuran_simpanan_wajib_pengawas')}}">Data Angsuran</a></li>
+        </ul>
+      </li>
 
+      <li class="<?php if($menu == 'simpanan_sukarela'){echo 'active';}?> ripple">
+        <a class="tree-toggle nav-header"><span class="fas fa-wallet"></span> Simpanan Sukarela 
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li><a href="{{route('simpanan_sukarela_anggota_pengawas')}}">Anggota</a></li>
+          <li><a href="">Data Angsuran</a></li>
+        </ul>
+      </li>
+
+      <li class="<?php if($menu == 'shu_anggota'){echo 'active';}?> ripple">
+        <a href="{{route('shu_anggota_pengawas')}}"><span class="fas fa-wallet"></span> Simpanan Hasil Usaha </a>
+      </li>
+        
         <li class="ripple">
           <a href=""><span class="fa fa-power-off"></span> Logout</a>
         </li>

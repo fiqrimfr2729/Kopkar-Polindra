@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <div class="panel-body text-center">
-                  <h1>5</h1>
+                  <h1>{{$pengawas}}</h1>
                   <p>Data Pengawas</p>
                   <hr />
                 </div>
@@ -59,7 +59,7 @@
                   </div>
                 </div>
                 <div class="panel-body text-center">
-                  <h1>6</h1>
+                  <h1>{{$pengurus}}</h1>
                   <p>Data Pengurus</p>
                   <hr />
                 </div>
@@ -78,7 +78,7 @@
                   </div>
                 </div>
                 <div class="panel-body text-center">
-                  <h1>20</h1>
+                  <h1>{{$anggota}}</h1>
                   <p>Data Anggota</p>
                   <hr />
                 </div>

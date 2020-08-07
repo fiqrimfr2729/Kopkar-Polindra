@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -19,9 +19,9 @@
       <<div class="panel box-shadow-none content-header">
         <div class="panel-body">
           <div class="col-md-12">
-            <h3 class="animated fadeInLeft" style="margin-top:10px;">Data Simpanan Pokok</h3>
+            <h3 class="animated fadeInLeft" style="margin-top:10px;">Data Simpanan Sukarela</h3>
             <p class="animated fadeInDown">
-              Dashboard <span class="fa-angle-right fa"></span> Anggota <span class="fa-angle-right fa"></span> Data Simpanan Pokok
+              Dashboard <span class="fa-angle-right fa"></span> Simpanan Sukarela <span class="fa-angle-right fa"></span> Data Simpanan Sukarela
             </p>
           </div>
         </div>
@@ -33,15 +33,10 @@
             <div class="panel">
                 <div class="panel-heading">
                 <h3>{{$anggota->nama_lengkap}} ({{$anggota->no_anggota}}) 
-                  <span class="label label-<?php if($total >= 500000) : echo 'success'; else: echo 'warning'; endif; ?>">@if($total>=500000) {{ "Lunas" }} @else {{ "Belum Lunas" }} @endif</span>
+                  <span class="label label-success"><?php $jumlah = $detail['jumlah']-$pengurangan ; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
                 </h3>
                   
                 </div>
-
-                <div class="form-group" style="margin-top:10px; margin-left:10px;">
-                    <a data-target="#modalCreate" data-toggle="modal" class="btn btn-raised btn-success"><i class="fas fa-plus"></i> Tambah data</a>
-                    <a data-target="#modalDetail" data-toggle="modal" class="btn btn-raised btn-info"><i class="fas fa-list"></i> Rincian </a>
-                  </div>
                 
                 <div class="panel-body">
                   <div class="responsive-table">
@@ -49,22 +44,22 @@
                       <thead>
                         <tr>
                           <th width="5%">No</th>
-                          <th>Tanggal </th>
+                          <th>Tanggal</th>
                           <th>Jumlah</th>
-                          <th>Action</th>
+                          <th width="30%">Keterangan </th>
+                          
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($simpanan as $key => $data)
-                          <tr>
-                            <td>{{++$key}} </td>
-                            <td>{{$data->tanggal}} </td>
-                            <td><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
-                            <td>
-                              <a data-target="#modalFormDetail" data-toggle="modal" class="btn ripple-infinite btn-primary" data-placement="top" title="Ubah"><span class="fas fa-edit"></span></a>
-                              <a data-target="#modalDelete" data-id_simpanan="{{$data->id_simpanan_pokok}}" data-toggle="modal" class="btn ripple-infinite btn-danger" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                        <tr>
+                            <td>{{++$key}}</td>
+                            <td>{{$data->tanggal}}</td>
+                            <td><?php $jumlah = $data->jumlah ; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
+                            <td>@if ($data->ket == "") {{ "-" }} @else {{ $data->ket }} @endif
                             </td>
-                          </tr>
+                            
+                        </tr>
                         @endforeach
                       
                       </tbody>
@@ -90,7 +85,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">Tambah Pembayaran Simpanan Pokok</h5>
+          <h5 class="modal-title" id="myModalLabel">Tambah Pembayaran Simpanan Sukarela</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -100,12 +95,22 @@
             {{ csrf_field() }}
             <div class="form-group">
               <label for="Nama Unit Kerja">No Anggota</label>
-              <input type="text" class="form-control" id="cat_id" name="no_anggota" value="{{$anggota->no_anggota}}" readonly="readonly" required />
+            <input type="text" class="form-control" id="cat_id" name="no_anggota" value="{{$anggota->no_anggota}}" readonly="readonly" required />
+            </div>
+
+            <div class="form-group">
+                <label for="tgl_dibayar">Tanggal Dibayarkan</label>
+              <input type="date" class="form-control" id="" name="tanggal" required>
             </div>
 
             <div class="form-group">
                 <label for="Nama Unit Kerja">Jumlah yang dibayarkan</label>
                 <input type="text" class="form-control mask-money" id="" name="jumlah" value="" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Keterangan">Keterangan</label>
+                <input type="text" class="form-control" id="" name="keterangan" value=" " />
             </div>
             
         </div>
@@ -143,44 +148,49 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">Rincian Simpanan Wajib</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <table class="table table-striped table-bordered table-hover no-footer">
-                  <tr>
-                      <th>Total Simpanan Pokok</th>
-                      <td id=""><?php $jumlah = $total; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
-                  </tr>
-                  <tr>
-                    <th>Sisa</th>
-                    <td id=""><?php $jumlah = 500000-$total; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
-                  </tr>
-                  
-              </table>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-info" data-dismiss="modal"><span class="fa fa-times-circle"></span> Close</button>
-          </div>
-      </div>
-  </div>
-</div>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Rincian Simpanan Wajib</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover no-footer">
+                        <tr>
+                            <th>Simpanan Wajib Tahun Ini</th>
+                            <td id=""><?php $jumlah = $detail['jumlah_tahun_ini']; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
+                        </tr>
+                        <tr>
+                            <th>Simpanan Sukarela Tahun Lalu</th>
+                            <td id=""><?php $jumlah = $detail['jumlah']-$detail['jumlah_tahun_ini']; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?> </td>
+                        </tr>
+                        <tr>
+                            <th>Total Simpanan Sukarela</th>
+                            <td id=""> <?php $jumlah = $detail['jumlah']; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
+                        </tr>
+                        
+                        
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"><span class="fa fa-times-circle"></span> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
   <!-- start: Javascript -->
-  @include('pengurus._partials.js')
+  @include('pengawas._partials.js')
   <!-- end: Javascript -->
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -190,12 +200,31 @@
   <script src="/js/plugins/jquery.mask.min.js"></script>
 
   <script type="text/javascript">
+    $('.mask-date').mask('00/00/0000');
+    $('.mask-time').mask('00:00:00');
+    $('.mask-date_time').mask('00/00/0000 00:00:00');
+    $('.mask-cep').mask('00000-000');
+    $('.mask-phone').mask('0000-0000-00000');
+    $('.mask-phone_with_ddd').mask('(00) 0000-0000');
+    $('.mask-number').mask('0000000000');
+    $('.mask-cpf').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('.mask-money').mask('000.000.000.000.000', {
+        reverse: true
+      });
+      $('.mask-money2').mask("#.##0,00", {
+        reverse: true
+      });
+  </script>
+
+  <script type="text/javascript">
         var formCreate = $('#modalFormCreate');
             formCreate.submit(function (e) {
                 console.log("test");
                 e.preventDefault();
                 $.ajax({
-                    url: '/pengurus/simpanan_pokok_create',
+                    url: '/pengurus/simpanan_wajib_create',
                     type: formCreate.attr('method'),
                     data: formCreate.serialize(),
                     dataType: "json",
@@ -239,7 +268,7 @@ var formDelete = $('#modalFormDelete');
         e.preventDefault();
 
         $.ajax({
-            url: '/pengurus/simpanan_pokok_delete',
+            url: '/pengurus/simpanan_wajib_delete',
             type: formDelete.attr('method'),
             data: formDelete.serialize(),
             dataType: "json",

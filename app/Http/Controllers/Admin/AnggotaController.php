@@ -67,7 +67,7 @@ class AnggotaController extends Controller
         $anggota->id_unit_kerja = $requst->id_unit_kerja;
         $anggota->tgl_gabung = $requst->tgl_gabung;
         $anggota->role = 1;
-        $anggota->password = Hash::make('Anggota123', ['rounds' => 12 ]);
+        $anggota->password = 'Anggota123';
 
         $query = $anggota->save();
 
@@ -90,6 +90,24 @@ class AnggotaController extends Controller
                 'message' => 'Success Edit Data'
               ], 200);
         }
+    }
+
+    public function reset_password(Request $request){
+        $password = Hash::make('Anggota123');
+        $query = DB::table('anggota')->where('no_anggota', $request->no_anggota)->update(['password' => $password]);
+
+        if($query){
+            return response()->json([
+                'error' => 0,
+                'message' => 'Success Edit Data'
+              ], 200);
+        }else{
+            return response()->json([
+                'error' => 1,
+                'message' => 'Gagal'
+              ], 200);
+        }
+    
     }
     
 }

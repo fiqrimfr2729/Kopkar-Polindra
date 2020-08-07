@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -21,7 +21,7 @@
           <div class="col-md-12">
             <h3 class="animated fadeInLeft" style="margin-top:10px;">Simpanan Hasil Usaha</h3>
             <p class="animated fadeInDown">
-              Dashboard <span class="fa-angle-right fa"></span> Simpanan Sukarela <span class="fa-angle-right fa"></span> Anggota
+              Dashboard <span class="fa-angle-right fa"></span> Simpanan Hasil Usaha <span class="fa-angle-right fa"></span> SHU Anggota
             </p>
           </div>
         </div>
@@ -32,33 +32,33 @@
           <div class="col-md-12 padding-0 animated fadeInRight">
             <div class="panel">
                 <div class="panel-heading">
-                  <h3>Data  Anggota</h3>
+                  <h3>Data SHU Anggota</h3>
                 </div>
-                
+                <div class="form-group" style="margin-top:10px; margin-left:10px;">
+                  
+                  
+                </div>
                 <div class="panel-body">
                   <div class="responsive-table">
                     <table id="" class="table table-striped table-bordered display" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>No Anggota</th>
-                          <th>Nama Lengkap</th>
-                          <th>SHU Anggota {{$tahun}}</th>
-                          
+                          <th width="5%">No</th>
+                          <th>Tahun</th>
+                          <th>Jumlah SHU Anggota</th>
                           <th>Aksi </th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($anggota as $key => $data)
+                        @foreach ($simpanan as $key => $data)
                         <tr>
-                            <td>{{$data->no_anggota}}</td>
-                            <td>{{$data->nama_lengkap}}</td>
+                            <td>{{++$key}}</td>
+                            <td>{{$data->tahun}}</td>
                             <td>
-                              <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->shu_anggota; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
+                                <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->shu_anggota; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
                             </td>
-                            
                             <td>
-                                <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" data-sisa="<?php $jumlah = $data->shu_anggota - $data->pengurangan; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>" data-nama_lengkap="{{$data->nama_lengkap}}" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>
-                                
+                              <a href="{{route('rincian_penerimaan_shu_pengawas',['tahun'=>$data->tahun])}}" class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
                             </td>
                         </tr>
                         @endforeach
@@ -77,7 +77,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">Pengurangan SHU Anggota</h5>
+              <h5 class="modal-title" id="myModalLabel">Tambah Pembayaran Simpanan Sukarela</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -85,38 +85,27 @@
             <div class="modal-body">
               <form id="modalFormCreate" action="" method="POST">
                 {{ csrf_field() }}
+
                 <div class="form-group">
-                  <label for="Nama Unit Kerja">No Anggota</label>
-                  <input type="text" class="form-control" id="cat_id" name="no_anggota" value="" readonly="readonly" required />
+                  <label for="">Total Simpanan Seluruhnya</label>
+                  <input type="text" class="form-control" id="total_simpanan" name="total_simpanan" value="" readonly="readonly" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="Nama Unit Kerja">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="cat_nama" name="nama_lengkap" value="" readonly="readonly" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="Nama Unit Kerja"> Total SHU (Simpanan Sukarela)</label>
-                  <input type="text" class="form-control" id="cat_sisa" name="sisa" value="" readonly="readonly" required />
-                </div>
-
-                <div class="form-group">
-                  <input type="hidden" class="form-control" id="" name="tahun" value="{{$tahun}}" readonly="readonly" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="tgl_dibayar"> Jumlah Pengurangan</label>
-                  <input type="text" class="form-control mask-money" id="" placeholder="Masukan Jumlah Pengurangan" name="pengurangan" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="tgl_dibayar">Pindahkan Ke</label>
-                  <select name="simpanan" id="#" class="form-control">
-                    <option value="" name="simpanan" disabled selected>Pilih Simpanan</option>
-                    <option value="pokok" name="simpanan" >Simpanan Pokok</option>
-                    <option value="wajib" name="simpanan" >Simpanan Wajib</option>
+                  <label for="">Tahun</label>
+                  <select name="tahun" id="tahun" class="form-control">
+                    <option value="" name="tahun" disabled selected>Pilih Tahun</option>
+                    @foreach($tahun as $key => $data)
+                      <option value="{{$data}}" name="tahun" >{{$data}}</option>
+                    @endforeach
+                    
                     
                   </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="Nama Unit Kerja"> Jumlah Hasil Usaha Anggota </label>
+                  <input type="text" class="form-control mask-money" id="" name="shu_anggota" value="" required />
                 </div>
                 
             </div>
@@ -129,44 +118,15 @@
         </div>
     </div>
 
-    @foreach ($anggota as $key => $data)
-      <div class="modal fade" id="modalDetail{{$key}}" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Rincian Simpanan Wajib</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover no-footer">
-                        <tr>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal"><span class="fa fa-times-circle"></span> Close</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    @endforeach
-    
-
 
     <!-- start: right menu -->
-    @include('pengurus._partials.right_menu')
+    @include('pengawas._partials.right_menu')
     <!-- end: right menu -->
 
   </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   
@@ -174,7 +134,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
  <!-- start: Javascript -->
- @include('pengurus._partials.js')
+ @include('pengawas._partials.js')
  <!-- end: Javascript -->
 
  <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -190,11 +150,9 @@
         var button     = $(event.relatedTarget)
         var no_anggota   = button.data('no_anggota')
         var nama_lengkap = button.data('nama_lengkap')
-        var sisa        = button.data('sisa')
         var modal      = $(this)
         modal.find('.modal-body #cat_nama').val(nama_lengkap)
-        modal.find('.modal-body #cat_id').val(no_anggota)
-        modal.find('.modal-body #cat_sisa').val(sisa)});
+        modal.find('.modal-body #cat_id').val(no_anggota)});
 
         
     </script>
@@ -224,7 +182,7 @@
                 console.log("test");
                 e.preventDefault();
                 $.ajax({
-                    url: '/pengurus/pengurangan_shu',
+                    url: '/pengurus/hitung_shu',
                     type: formCreate.attr('method'),
                     data: formCreate.serialize(),
                     dataType: "json",
@@ -238,7 +196,7 @@
                               'success'
                           ).then(OK => {
                             if(OK){
-                                location.reload();
+                                window.location.href = "{{ route('shu_anggota') }}";
                             }
                           });
                       }else{
@@ -253,6 +211,39 @@
                   })
               });
   </script>
+
+<script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+      // Kita sembunyikan dulu untuk loadingnya
+
+      $("#tahun").change(function(){ // Ketika user mengganti atau memilih data provinsi
+         // Sembunyikan dulu combobox kota nya
+          // Tampilkan loadingnya
+
+          $.ajax({
+              type: "GET", // Method pengiriman data bisa dengan GET atau POST
+              url: "/pengurus/total_simpanan", // Isi dengan url/path file php yang dituju
+              data: {tahun : $("#tahun").val()}, // data yang akan dikirim ke file yang dituju
+              dataType: "json",
+              beforeSend: function(e) {
+                  if(e && e.overrideMimeType) {
+                          e.overrideMimeType("application/json;charset=UTF-8");
+                  }
+              },
+              success: function(response){ // Ketika proses pengiriman berhasil
+                 // Sembunyikan loadingnya
+
+                  // set isi dari combobox kota
+                  // lalu munculkan kembali combobox kotanya
+                  document.getElementById('total_simpanan').value =  response.jumlah;
+              },
+              error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+                  alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+              }
+          });
+      });
+  });
+</script>
 
 
 </body>

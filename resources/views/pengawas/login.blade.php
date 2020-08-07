@@ -88,7 +88,7 @@
 				e.preventDefault();
 	  
 				$.ajax({
-					url:'/pengurus/do_login',
+					url:'/pengawas/do_login',
 					type:formLogin.attr('method'),
 					data:formLogin.serialize(),
 					dataType:"json",
@@ -120,7 +120,7 @@
 								icon: "fa fa-check",
 								delay:500,
 														  after_close: function(){
-																  window.location.href = "{{ route('dashboard_pengurus') }}";
+																  window.location.href = "{{ route('dashboard_pengawas') }}";
 														  }
 							})
 						}else{

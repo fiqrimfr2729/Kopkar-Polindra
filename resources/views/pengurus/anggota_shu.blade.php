@@ -58,7 +58,6 @@
                                 <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->shu_anggota; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
                             </td>
                             <td>
-                                <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="" data-nama_lengkap="" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>
                               <a href="{{route('rincian_penerimaan_shu',['tahun'=>$data->tahun])}}" class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
                             </td>
                         </tr>

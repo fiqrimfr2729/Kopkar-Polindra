@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -19,9 +19,9 @@
       <<div class="panel box-shadow-none content-header">
         <div class="panel-body">
           <div class="col-md-12">
-            <h3 class="animated fadeInLeft" style="margin-top:10px;">Simpanan Hasil Usaha</h3>
+            <h3 class="animated fadeInLeft" style="margin-top:10px;">Simpanan Wajib</h3>
             <p class="animated fadeInDown">
-              Dashboard <span class="fa-angle-right fa"></span> Simpanan Sukarela <span class="fa-angle-right fa"></span> Anggota
+              Dashboard <span class="fa-angle-right fa"></span> Simpanan Wajib <span class="fa-angle-right fa"></span> Anggota
             </p>
           </div>
         </div>
@@ -40,25 +40,29 @@
                     <table id="" class="table table-striped table-bordered display" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>No Anggota</th>
+                          <th width="5%">No</th>
                           <th>Nama Lengkap</th>
-                          <th>SHU Anggota {{$tahun}}</th>
-                          
-                          <th>Aksi </th>
+                          <th>No Anggota</th>
+                          <th>Simpanan Tahun Ini</th>
+                          <th>Total Simpanan</th>
+                          <th>Action </th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($anggota as $key => $data)
                         <tr>
-                            <td>{{$data->no_anggota}}</td>
+                            <td>{{++$key}}</td>
                             <td>{{$data->nama_lengkap}}</td>
+                            <td>{{$data->no_anggota}}</td>
                             <td>
-                              <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->shu_anggota; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
+                                <?php $jumlah = $data->jumlah_tahun_ini; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
                             </td>
-                            
                             <td>
-                                <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" data-sisa="<?php $jumlah = $data->shu_anggota - $data->pengurangan; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>" data-nama_lengkap="{{$data->nama_lengkap}}" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>
+                                <?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>
+                            </td>
+                            <td>
                                 
+                                <a href="{{route('detail_simpanan_wajib_pengawas',['no_anggota'=>$data->no_anggota])}}" class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
                             </td>
                         </tr>
                         @endforeach
@@ -77,7 +81,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">Pengurangan SHU Anggota</h5>
+              <h5 class="modal-title" id="myModalLabel">Tambah Pembayaran Simpanan Pokok</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -96,27 +100,18 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="Nama Unit Kerja"> Total SHU (Simpanan Sukarela)</label>
-                  <input type="text" class="form-control" id="cat_sisa" name="sisa" value="" readonly="readonly" required />
+                    <label for="tgl_dibayar">Tanggal Dibayarkan</label>
+                  <input type="date" class="form-control" id="" name="tanggal" required>
                 </div>
-
+    
                 <div class="form-group">
-                  <input type="hidden" class="form-control" id="" name="tahun" value="{{$tahun}}" readonly="readonly" required />
+                    <label for="Nama Unit Kerja">Jumlah yang dibayarkan</label>
+                    <input type="text" class="form-control mask-money" id="" name="jumlah" value="" required />
                 </div>
-
+    
                 <div class="form-group">
-                  <label for="tgl_dibayar"> Jumlah Pengurangan</label>
-                  <input type="text" class="form-control mask-money" id="" placeholder="Masukan Jumlah Pengurangan" name="pengurangan" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="tgl_dibayar">Pindahkan Ke</label>
-                  <select name="simpanan" id="#" class="form-control">
-                    <option value="" name="simpanan" disabled selected>Pilih Simpanan</option>
-                    <option value="pokok" name="simpanan" >Simpanan Pokok</option>
-                    <option value="wajib" name="simpanan" >Simpanan Wajib</option>
-                    
-                  </select>
+                    <label for="Keterangan">Keterangan</label>
+                    <input type="text" class="form-control" id="" name="keterangan" value=" " />
                 </div>
                 
             </div>
@@ -129,44 +124,15 @@
         </div>
     </div>
 
-    @foreach ($anggota as $key => $data)
-      <div class="modal fade" id="modalDetail{{$key}}" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-labelledby="largeModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Rincian Simpanan Wajib</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped table-bordered table-hover no-footer">
-                        <tr>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal"><span class="fa fa-times-circle"></span> Close</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    @endforeach
-    
-
 
     <!-- start: right menu -->
-    @include('pengurus._partials.right_menu')
+    @include('pengawas._partials.right_menu')
     <!-- end: right menu -->
 
   </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   
@@ -174,7 +140,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
  <!-- start: Javascript -->
- @include('pengurus._partials.js')
+ @include('pengawas._partials.js')
  <!-- end: Javascript -->
 
  <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -190,11 +156,9 @@
         var button     = $(event.relatedTarget)
         var no_anggota   = button.data('no_anggota')
         var nama_lengkap = button.data('nama_lengkap')
-        var sisa        = button.data('sisa')
         var modal      = $(this)
         modal.find('.modal-body #cat_nama').val(nama_lengkap)
-        modal.find('.modal-body #cat_id').val(no_anggota)
-        modal.find('.modal-body #cat_sisa').val(sisa)});
+        modal.find('.modal-body #cat_id').val(no_anggota)});
 
         
     </script>
@@ -224,7 +188,7 @@
                 console.log("test");
                 e.preventDefault();
                 $.ajax({
-                    url: '/pengurus/pengurangan_shu',
+                    url: '/pengurus/simpanan_wajib_create',
                     type: formCreate.attr('method'),
                     data: formCreate.serialize(),
                     dataType: "json",
@@ -238,7 +202,7 @@
                               'success'
                           ).then(OK => {
                             if(OK){
-                                location.reload();
+                                window.location.href = "{{ route('simpanan_wajib_anggota') }}";
                             }
                           });
                       }else{

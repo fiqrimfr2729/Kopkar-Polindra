@@ -32,7 +32,7 @@
           <div class="col-md-12 padding-0 animated fadeInRight">
             <div class="panel">
                 <div class="panel-heading">
-                  <h3>Data  Anggota</h3>
+                  <h3>Data Anggota</h3>
                 </div>
                 
                 <div class="panel-body">
@@ -43,7 +43,7 @@
                           <th width="5%">No</th>
                           <th>Nama Lengkap</th>
                           <th>No Anggota</th>
-                          <th>Jumlah Simpanan</th>
+                          <th>Total Simpanan</th>
                           <th>Aksi </th>
                         </tr>
                       </thead>
@@ -54,7 +54,7 @@
                             <td>{{$data->nama_lengkap}}</td>
                             <td>{{$data->no_anggota}}</td>
                             <td>
-                                <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
+                              <span style="font-size: 100%" class=""><?php $jumlah = $data->jumlah-$data->pengurangan; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
                             </td>
                             <td>
                                 <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" data-nama_lengkap="{{$data->nama_lengkap}}" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>

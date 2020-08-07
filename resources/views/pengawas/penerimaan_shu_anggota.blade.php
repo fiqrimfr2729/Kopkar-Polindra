@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -43,8 +43,6 @@
                           <th>No Anggota</th>
                           <th>Nama Lengkap</th>
                           <th>SHU Anggota {{$tahun}}</th>
-                          
-                          <th>Aksi </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -54,11 +52,6 @@
                             <td>{{$data->nama_lengkap}}</td>
                             <td>
                               <span style="font-size: 100%" class="label label-success"><?php $jumlah = $data->shu_anggota; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></span>
-                            </td>
-                            
-                            <td>
-                                <a data-target="#modalCreate" data-toggle="modal" data-no_anggota="{{$data->no_anggota}}" data-sisa="<?php $jumlah = $data->shu_anggota - $data->pengurangan; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?>" data-nama_lengkap="{{$data->nama_lengkap}}" class=" btn ripple-infinite btn-success" data-placement="top" title="Tambah"><span class="fas fa-plus"></span></a>
-                                
                             </td>
                         </tr>
                         @endforeach
@@ -160,13 +153,13 @@
 
 
     <!-- start: right menu -->
-    @include('pengurus._partials.right_menu')
+    @include('pengawas._partials.right_menu')
     <!-- end: right menu -->
 
   </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   
@@ -174,7 +167,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
  <!-- start: Javascript -->
- @include('pengurus._partials.js')
+ @include('pengawas._partials.js')
  <!-- end: Javascript -->
 
  <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

@@ -19,9 +19,9 @@
       <<div class="panel box-shadow-none content-header">
         <div class="panel-body">
           <div class="col-md-12">
-            <h3 class="animated fadeInLeft" style="margin-top:10px;">Data Pengurus</h3>
+            <h3 class="animated fadeInLeft" style="margin-top:10px;">Data Pengawas</h3>
             <p class="animated fadeInDown">
-              Dashboard <span class="fa-angle-right fa"></span> Anggota <span class="fa-angle-right fa"></span> Pengurus
+              Dashboard <span class="fa-angle-right fa"></span> Anggota <span class="fa-angle-right fa"></span> Pengawas
             </p>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="col-md-12 padding-0 animated fadeInRight">
             <div class="panel">
                 <div class="panel-heading">
-                  <h3>Data Pengurus</h3>
+                  <h3>Data Pengawas</h3>
                 </div>
                 <div class="form-group" style="margin-top:10px; margin-left:10px;">
                   <a data-target="#modalCreate" data-toggle="modal" class="btn btn-raised btn-success"><i class="fas fa-plus"></i> Tambah data</a>
@@ -51,7 +51,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($pengurus as $key => $data)
+                        @foreach ($pengawas as $key => $data)
                             <tr>
                               <td> {{++$key}} </td>
                               <td> {{$data->nama_lengkap}} </td>
@@ -200,7 +200,7 @@
           console.log("test");
           e.preventDefault();
           $.ajax({
-              url: '/pengurus_add',
+              url: '/pengawas_add',
               type: formCreate.attr('method'),
               data: formCreate.serialize(),
               dataType: "json",
@@ -214,7 +214,7 @@
                         'success'
                     ).then(OK => {
                       if(OK){
-                          window.location.href = "{{ route('pengurus') }}";
+                          window.location.href = "{{ route('pengawas') }}";
                       }
                     });
                 }else{

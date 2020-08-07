@@ -1,14 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Pengurus;
+namespace App\Http\Controllers\Pengawas;
 
 use DB;
-use App\SimpananHasilUsaha;
-use App\SimpananWajib;
-use App\SimpananPokok;
-use App\SimpananSukarela;
-use App\SHUAnggota;
-use App\PenguranganSHUAnggota;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -37,7 +31,7 @@ class SimpananHasilUsahaController extends Controller
         }
         
         //return $tahun;
-        return view('pengurus.anggota_shu', compact('menu', 'simpanan', 'tahun'));
+        return view('pengawas.anggota_shu', compact('menu', 'simpanan', 'tahun'));
     }
 
     public function total_simpanan(Request $request){
@@ -59,57 +53,6 @@ class SimpananHasilUsahaController extends Controller
         
     }
 
-    public function hitung_shu(Request $request){
-        $total_shu_anggota = str_replace('.', '', $request->shu_anggota);
-        $tahun = $request->tahun;
-
-        $simpanan_wajib = DB::table('simpanan_wajib')->whereYear('tanggal', '=', $tahun)->sum('jumlah');
-        $simpanan_pokok = DB::table('simpanan_pokok')->whereYear('tanggal', '=', $tahun)->sum('jumlah');
-        $simpanan_sukarela = DB::table('simpanan_sukarela')->whereYear('tanggal', '=', $tahun)->sum('jumlah');
-
-        $total_simpanan_seluruhnya = $simpanan_wajib + $simpanan_sukarela + $simpanan_pokok;
-
-        $persentasi = $total_shu_anggota/$total_simpanan_seluruhnya;
-
-        $anggota = DB::table('anggota')->get();
-
-        foreach($anggota as $data){
-            $simpanan_wajib = DB::table('simpanan_wajib')->whereYear('tanggal', '=', $tahun)->where('no_anggota', $data->no_anggota)->sum('jumlah');
-            $simpanan_pokok = DB::table('simpanan_pokok')->whereYear('tanggal', '=', $tahun)->where('no_anggota', $data->no_anggota)->sum('jumlah');
-            $simpanan_sukarela = DB::table('simpanan_sukarela')->whereYear('tanggal', '=', $tahun)->where('no_anggota', $data->no_anggota)->sum('jumlah');
-            $total_simpanan_anggota = $simpanan_wajib + $simpanan_sukarela + $simpanan_pokok;
-
-            $total_shu = $persentasi * $total_simpanan_anggota;
-            $shu_anggota = new SHUAnggota();
-            $shu_anggota->no_anggota = $data->no_anggota;
-            $shu_anggota->tahun = $tahun;
-            $shu_anggota->jumlah = $total_shu;
-
-            $sukarela = new SimpananSukarela();
-            $sukarela->jumlah = $total_shu;
-            $sukarela->no_anggota = $data->no_anggota;
-            $sukarela->tanggal = date("Y-m-d");
-            $sukarela->ket = "Simpanan Hasil Usaha Tahun $tahun";
-            $sukarela->save();
-
-            $shu_anggota->save();
-        }
-
-        $shu = new SimpananHasilUsaha();
-
-        $shu->tahun = $tahun;
-        $shu->shu_anggota = $total_shu_anggota;
-        $shu->save();
-
-        if($shu){
-            return response()->json([
-                'error' => 0,
-                'message' => 'Tambah Data Berhasil'
-              ], 200);
-        }
-
-        //return $shu;
-    }
 
     public function pengurangan_shu(Request $request){
         $pengurangan_shu = new PenguranganSHUAnggota();
@@ -163,7 +106,6 @@ class SimpananHasilUsahaController extends Controller
 
         //return $anggota;
 
-        return view('pengurus.penerimaan_shu_anggota', compact('menu', 'anggota', 'tahun'));
+        return view('pengawas.penerimaan_shu_anggota', compact('menu', 'anggota', 'tahun'));
     }
-
 }

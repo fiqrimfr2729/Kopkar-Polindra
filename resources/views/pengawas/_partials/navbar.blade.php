@@ -11,7 +11,7 @@
         </a>
   
         <ul class="nav navbar-nav navbar-right user-nav">
-          <li class="user-name"><span>Admin</span></li>
+          <li class="user-name"><span>Pengawas</span></li>
             <li class="dropdown avatar-dropdown">
              <img src="/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
              <ul class="dropdown-menu user-dropdown">

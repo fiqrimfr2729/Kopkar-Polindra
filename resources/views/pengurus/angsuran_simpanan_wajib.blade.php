@@ -65,7 +65,7 @@
                             <td><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
                             <td>
                               <a href={{route('rincian_angsuran_wajib', ['month'=>$data->month,'year'=>$data->year])}} class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
-                              <button type="button" data-target="#modalUpdate" data-id_unit_kerja="" data-toggle="modal" class=" btn  ripple-infinite btn-primary" data-placement="top" title="Ubah"><span class="fas fa-edit"></span></button>
+                              
                             </td>
                         </tr>
                         @endforeach

@@ -6,8 +6,8 @@
             <p class="animated fadeInRight">Sat, October 1st 2029</p>
         </li>
   
-        <li class="">
-          <a href=""><span class="fa-home fa"></span> Dashboard </a>
+        <li class="<?php if($menu == 'dashboard'){echo 'active';}?> ripple">
+          <a href="{{route('dashboard_pengurus')}}"><span class="fa-home fa"></span> Dashboard </a>
         </li>
 
       <li class="<?php if($menu == 'anggota'){echo 'active';}?> ripple">

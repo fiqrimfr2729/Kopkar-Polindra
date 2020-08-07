@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pengurus;
+namespace App\Http\Controllers\Pengawas;
 
 use DB;
 use App\SimpananSukarela;
@@ -22,7 +22,7 @@ class SimpananSukarelaController extends Controller
         }
         
         
-        return view('pengurus.anggota_simpanan_sukarela', compact('menu', 'anggota'));
+        return view('pengawas.anggota_simpanan_sukarela', compact('menu', 'anggota'));
     }
 
     public function detail($no_anggota){
@@ -53,25 +53,7 @@ class SimpananSukarelaController extends Controller
         );
         
         //return $detail;
-        return view('pengurus.detail_simpanan_sukarela', compact('menu', 'simpanan', 'anggota', 'detail', 'pengurangan'));
+        return view('pengawas.detail_simpanan_sukarela', compact('menu', 'simpanan', 'anggota', 'detail', 'pengurangan'));
     }
 
-    public function store(Request $request){
-        date_default_timezone_set("Asia/Jakarta");
-        $simpanan = new SimpananSukarela();
-
-        $simpanan->no_anggota = $request->no_anggota;
-        $simpanan->tanggal = $request->tanggal;
-        $simpanan->jumlah = str_replace('.', '', $request->jumlah);
-        $simpanan->ket = $request->keterangan;
-
-        $simpanan->save();
-
-        if($simpanan){
-            return response()->json([
-                'error' => 0,
-                'message' => 'Tambah Data Berhasil'
-              ], 200);
-        }
-    }
 }

@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -19,9 +19,9 @@
       <<div class="panel box-shadow-none content-header">
         <div class="panel-body">
           <div class="col-md-12">
-            <h3 class="animated fadeInLeft" style="margin-top:10px;">Simpanan Pokok</h3>
+            <h3 class="animated fadeInLeft" style="margin-top:10px;">Simpanan Wajib</h3>
             <p class="animated fadeInDown">
-              Dashboard <span class="fa-angle-right fa"></span> Simpanan Pokok <span class="fa-angle-right fa"></span> Anggota
+              Dashboard <span class="fa-angle-right fa"></span> Simpanan Wajib <span class="fa-angle-right fa"></span> Angsuran
             </p>
           </div>
         </div>
@@ -32,11 +32,10 @@
           <div class="col-md-12 padding-0 animated fadeInRight">
             <div class="panel">
                 <div class="panel-heading">
-                  <h3>Rekap Bulanan</h3>
+                  <h3>Rekap Pembayaran</h3>
                 </div>
 
                 <div class="form-group" style="margin-top:10px; margin-left:10px;">
-                  
                   <a data-target="#modalDetail" data-toggle="modal" class="btn btn-raised btn-info"><i class="fas fa-list"></i> Rincian </a>
                 </div>
                 
@@ -65,7 +64,7 @@
                             <td>{{$data->year}}</td>
                             <td><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
                             <td>
-                              <a href={{route('rincian_angsuran', ['month'=>$data->month,'year'=>$data->year])}} class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
+                              <a href={{route('rincian_angsuran_wajib_pengawas', ['month'=>$data->month,'year'=>$data->year])}} class=" btn ripple-infinite btn-info" data-placement="top" title="Detail"><span class="fas fa-list"></span></a>
                               
                             </td>
                         </tr>
@@ -110,17 +109,17 @@
 
 
     <!-- start: right menu -->
-    @include('pengurus._partials.right_menu')
+    @include('pengawas._partials.right_menu')
     <!-- end: right menu -->
 
   </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   <!-- start: Javascript -->
-  @include('pengurus._partials.js')
+  @include('pengawas._partials.js')
   <!-- end: Javascript -->
 </body>
 

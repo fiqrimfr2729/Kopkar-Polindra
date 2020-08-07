@@ -5,12 +5,12 @@
 
 <body id="mimin" class="dashboard">
   <!-- start: Header -->
-  @include('pengurus._partials.navbar')
+  @include('pengawas._partials.navbar')
   <!-- end: Header -->
 
   <div class="container-fluid mimin-wrapper">
     <!-- start:Left Menu -->
-    @include('pengurus._partials.sidebar')
+    @include('pengawas._partials.sidebar')
     <!-- end: Left Menu -->
 
 
@@ -39,9 +39,7 @@
                 </div>
 
                 <div class="form-group" style="margin-top:10px; margin-left:10px;">
-                    <a data-target="#modalCreate" data-toggle="modal" class="btn btn-raised btn-success"><i class="fas fa-plus"></i> Tambah data</a>
-                    <a data-target="#modalDetail" data-toggle="modal" class="btn btn-raised btn-info"><i class="fas fa-list"></i> Rincian </a>
-                  </div>
+                </div>
                 
                 <div class="panel-body">
                   <div class="responsive-table">
@@ -51,7 +49,7 @@
                           <th width="5%">No</th>
                           <th>Tanggal </th>
                           <th>Jumlah</th>
-                          <th>Action</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -60,10 +58,7 @@
                             <td>{{++$key}} </td>
                             <td>{{$data->tanggal}} </td>
                             <td><?php $jumlah = $data->jumlah; $jumlah="Rp ". number_format($jumlah,0,',','.'); echo $jumlah ?></td>
-                            <td>
-                              <a data-target="#modalFormDetail" data-toggle="modal" class="btn ripple-infinite btn-primary" data-placement="top" title="Ubah"><span class="fas fa-edit"></span></a>
-                              <a data-target="#modalDelete" data-id_simpanan="{{$data->id_simpanan_pokok}}" data-toggle="modal" class="btn ripple-infinite btn-danger" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
-                            </td>
+                            
                           </tr>
                         @endforeach
                       
@@ -101,6 +96,11 @@
             <div class="form-group">
               <label for="Nama Unit Kerja">No Anggota</label>
               <input type="text" class="form-control" id="cat_id" name="no_anggota" value="{{$anggota->no_anggota}}" readonly="readonly" required />
+            </div>
+
+            <div class="form-group">
+              <label for="tgl_dibayar">Tanggal Dibayarkan</label>
+              <input type="date" class="form-control" id="" name="tanggal" required>
             </div>
 
             <div class="form-group">
@@ -173,14 +173,14 @@
 </div>
 
   <!-- start: Mobile -->
-  @include('pengurus._partials.mobile')
+  @include('pengawas._partials.mobile')
   <!-- end: Mobile -->
 
   <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
   <!-- start: Javascript -->
-  @include('pengurus._partials.js')
+  @include('pengawas._partials.js')
   <!-- end: Javascript -->
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
